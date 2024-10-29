@@ -3,13 +3,13 @@ let api= 'https://jhtgnvxxtcyogorozive.supabase.co/rest/v1/capstone_games'
 let token= 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpodGdudnh4dGN5b2dvcm96aXZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg0MzU4NjIsImV4cCI6MjA0NDAxMTg2Mn0.O8nw_GS332iP89quZbi0YZkbEdRrnBYkHd2E4gLy3D8'
 
 let modalPlatform
+let selectedPlatforms = []
 
 const createGame = async()=>{
     
     event.preventDefault()
     let title= inputTitle.value
     let genre= catGenre.value
-    let platforms= []
     let rating= catRating.value
     let release_date= inputRelease.value
     
@@ -18,7 +18,7 @@ const createGame = async()=>{
     let game = {
         title,
         genre,
-        platforms,
+        platforms: selectedPlatforms,
         rating,
         release_date
     }
@@ -71,7 +71,7 @@ const getGames = async()=> {
             tableLayout+=`<tr>
             <td>${body[i].title}</td>
             <td>${body[i].genre}</td>
-            <td><button class="btn btn-primary" onclick="showPlatModal()">For Modal</button> </td>
+            <td><button class="btn btn-primary" onclick="tablePlatModal()">For Modal</button> </td>
             <td>${body[i].rating}</td>
             <td>${body[i].release_date}</td>
             </tr>`
@@ -88,21 +88,42 @@ const showPlatModal = ()=>{
 
 }
 
-const addPlatform = async()=>{
+const tablePlatModal = async()=>{
 
+    tablePlatform = new bootstrap.Modal(document.getElementById("tablePlatModal"))
 
+    tablePlatform.show()
 
+}
 
+const getPlatforms = async(id)=>{
 
-    let response = await fetch(api,{
-        method: 'POST',
+     let url = `${api}?id=eq.${id}`
+
+     
+    let response = await fetch(url,{
+        method: 'GET',
         headers:{
             'apikey': token,
             'Authorization': token,
-            'Content-Type' : 'application/json'
         },
-        body: JSON.stringify(game)
     })
 
+    let data = await response.json()
 
+    if(response.ok){
+        renderList(data)
+
+    }
+}
+
+const renderList = ()=>{
+
+    for(let i=0; i < data.length; i++){
+        listLayout += `<li>${data[i].platforms} </li>`
+    }
+}
+
+const modelForm = ()=>{
+    let 
 }
