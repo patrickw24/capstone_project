@@ -125,5 +125,8 @@ const renderList = ()=>{
 }
 
 const modelForm = ()=>{
-    let 
+   
+    let type = modalType.value
+    let manufacturer = modalManufacturer.value
+  
 }
