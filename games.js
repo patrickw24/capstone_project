@@ -3,7 +3,7 @@ let api= 'https://jhtgnvxxtcyogorozive.supabase.co/rest/v1/capstone_games'
 let token= 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpodGdudnh4dGN5b2dvcm96aXZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg0MzU4NjIsImV4cCI6MjA0NDAxMTg2Mn0.O8nw_GS332iP89quZbi0YZkbEdRrnBYkHd2E4gLy3D8'
 
 let modalPlatform
-let selectedPlatforms = []
+
 
 const createGame = async()=>{
     
@@ -13,12 +13,26 @@ const createGame = async()=>{
     let rating= catRating.value
     let release_date= inputRelease.value
     
+    let psInput = document.getElementById("inputPS").checked
+    let xboxInput = document.getElementById("inputXBOX").checked
+    let nsInput = document.getElementById("inputNS").checked
+    let pcInput = document.getElementById("inputPC").checked
+    let mobileInput = document.getElementById("inputMB").checked
+    let otherInput = document.getElementById("inputOther").checked
 
-
+    let platforms=[
+        {PlayStation : psInput},
+        {Xbox : xboxInput},
+        {Nintendo_Switch: nsInput},
+        {PC : pcInput},
+        {Mobile : mobileInput},
+        {Other : otherInput},
+    ]
+ console.log(platforms)
     let game = {
         title,
         genre,
-        platforms: selectedPlatforms,
+        platforms,
         rating,
         release_date
     }
@@ -71,7 +85,7 @@ const getGames = async()=> {
             tableLayout+=`<tr>
             <td>${body[i].title}</td>
             <td>${body[i].genre}</td>
-            <td><button class="btn btn-primary" onclick="tablePlatModal()">For Modal</button> </td>
+            <td><button class="btn btn-primary" onclick="getPlatforms(id)">Available Platforms</button> </td>
             <td>${body[i].rating}</td>
             <td>${body[i].release_date}</td>
             </tr>`
@@ -82,6 +96,7 @@ const getGames = async()=> {
 }
 
 const showPlatModal = ()=>{
+    event.preventDefault()
     modalPlatform = new bootstrap.Modal(document.getElementById("platformModal"))
 
     modalPlatform.show()
@@ -89,7 +104,7 @@ const showPlatModal = ()=>{
 }
 
 const tablePlatModal = async()=>{
-
+    event.preventDefault()
     tablePlatform = new bootstrap.Modal(document.getElementById("tablePlatModal"))
 
     tablePlatform.show()
@@ -112,21 +127,35 @@ const getPlatforms = async(id)=>{
     let data = await response.json()
 
     if(response.ok){
-        renderList(data)
+        let platforms = data[0].platforms
+        renderList(platforms)
 
     }
 }
 
-const renderList = ()=>{
+const renderList = (data)=>{
+
+    let listLayout= ``
+
+    
 
     for(let i=0; i < data.length; i++){
-        listLayout += `<li>${data[i].platforms} </li>`
+
+        if()
+
+        listLayout += `<li>${data.platforms[i].length} </li>`
+
+        if(data.)
+
+
     }
+    platformList.innerHTML = listLayout
+    console.log(listLayout)
 }
 
-const modelForm = ()=>{
+const closePlatModal = ()=>{
    
-    let type = modalType.value
-    let manufacturer = modalManufacturer.value
-  
+    modalPlatform.hide()
+
 }
+

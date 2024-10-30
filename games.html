@@ -15,7 +15,7 @@
     <main class="container">
 
 
-        <form >
+        <form onsubmit="createGame()">
             <div class="mb-3">
               <label for="inputTitle" class="form-label">Game Title</label>
               <input type="text" class="form-control" id="inputTitle" required>
@@ -37,7 +37,7 @@
 
               <div id="divPlatform" class="mb-3">
                 <label>Platform</label>
-               <button onclick="showPlatModal()" class="btn btn-info" style="display: block"> Add Platform Info</button>
+               <button onclick="showPlatModal()" type="button" class="btn btn-info" style="display: block"> Add Platform Info</button>
 
 
               </div>
@@ -59,7 +59,7 @@
                 <input type="date" class="form-control" id="inputRelease" required>
                 
               </div>
-            <button onclick="createGame()" type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
 
           <table id="gameTable" class="table">
@@ -78,59 +78,40 @@
                   <form id="platformForm">
                     <div>
                       <label>
-                        <input type="checkbox" name="platforms" value="platform1"> PlayStation 
+                        <input id="inputPS" type="checkbox" name="platforms"> PlayStation 
                       </label>
                     </div>
                     <div>
                       <label>
-                        <input type="checkbox" name="platforms" value="platform2"> Xbox 
+                        <input id="inputXBOX" type="checkbox" name="platforms"> Xbox 
                       </label>
                     </div>
                     <div>
                       <label>
-                        <input type="checkbox" name="platforms" value="platform3"> Nintendo Switch
+                        <input id="inputNS" type="checkbox" name="platforms"> Nintendo Switch
                       </label>
                     </div>
                     <div>
                       <label>
-                        <input type="checkbox" name="platforms" value="platform2"> 
+                        <input id="inputPC" type="checkbox" name="platforms"> 
                         PC
                       </label>
                     </div>
                     <div>
                       <label>
-                        <input type="checkbox" name="platforms" value="platform2"> Mobile
+                        <input id="inputMB" type="checkbox" name="platforms"> Mobile
                       </label>
                     </div>
                     <div>
                       <label>
-                        <input type="checkbox" name="platforms" value="platform2"> 
+                        <input id="inputOther" type="checkbox" name="platforms"> 
                         Other
                       </label>
                     </div>
-                    <br>
-                    <label>Type</label>
-                    <select id="modalType" class="form-control">
-                      <option>--Select Option--</option>
-                      <option value="Console">Console</option>
-                      <option value="Desktop">Desktop</option>
-                      <option value="Mobile">Mobile</option>
-                      <option value="Other">Other</option>
-                    </select>
-                    <br>
-                    <label>Manufacturer</label>
-                    <select id="modalManufacturer" class="form-control">
-                      <option>--Select Option--</option>
-                      <option value="Sony">Sony</option>
-                      <option value="Microsoft">Microsoft</option>
-                      <option value="Iphone/Android">Iphone/Android</option>
-                      <option value="Other">Other</option>
-                    </select>
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" id="savePlatforms">Save changes</button>
+                  <button onclick="closePlatModal()" type="button" class="btn btn-primary" >Save changes</button>
                 </div>
               </div>
             </div>
