@@ -85,7 +85,7 @@ const getGames = async()=> {
             tableLayout+=`<tr>
             <td>${body[i].title}</td>
             <td>${body[i].genre}</td>
-            <td><button class="btn btn-primary" onclick="getPlatforms(id)">Available Platforms</button> </td>
+            <td><button class="btn btn-primary" onclick="showTablePlatforms(${body[i].id})">Available Platforms</button> </td>
             <td>${body[i].rating}</td>
             <td>${body[i].release_date}</td>
             </tr>`
@@ -103,7 +103,7 @@ const showPlatModal = ()=>{
 
 }
 
-const tablePlatModal = async()=>{
+const tablePlatModal = ()=>{
     event.preventDefault()
     tablePlatform = new bootstrap.Modal(document.getElementById("tablePlatModal"))
 
@@ -115,7 +115,7 @@ const getPlatforms = async(id)=>{
 
      let url = `${api}?id=eq.${id}`
 
-     
+     console.log(id)
     let response = await fetch(url,{
         method: 'GET',
         headers:{
@@ -137,18 +137,29 @@ const renderList = (data)=>{
 
     let listLayout= ``
 
-    
+console.log(data)
+   if (data[0].PlayStation === true){
+    listLayout+= `<li>Playstation</li>`
+   }
+   if (data[1].Xbox === true){
+    listLayout+=`<li>Xbox</li>`
+}
+if (data[2].Nintendo_Switch === true){
+    listLayout+=`<li>Nintendo Switch</li>`
+}
+if (data[3].PC === true){
+    listLayout+=`<li>PC</li>`
+}
+if (data[4].Mobile === true){
+    listLayout+=`<li>Mobile</li>`
+}
+if (data[5].Other === true){
+    listLayout+=`<li>Other</li>`
+}
 
-    for(let i=0; i < data.length; i++){
-
-        if()
-
-        listLayout += `<li>${data.platforms[i].length} </li>`
-
-        if(data.)
 
 
-    }
+
     platformList.innerHTML = listLayout
     console.log(listLayout)
 }
@@ -157,5 +168,11 @@ const closePlatModal = ()=>{
    
     modalPlatform.hide()
 
+}
+
+const showTablePlatforms = (id)=>{
+
+     getPlatforms(id)
+    tablePlatModal()
 }
 
