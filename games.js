@@ -11,6 +11,7 @@ const createGame = async () => {
   let genre = catGenre.value;
   let rating = catRating.value;
   let release_date = inputRelease.value;
+  let added_by = window.localStorage.getItem("username")
 
   let psInput = document.getElementById("inputPS").checked;
   let xboxInput = document.getElementById("inputXBOX").checked;
@@ -34,6 +35,7 @@ const createGame = async () => {
     platforms,
     rating,
     release_date,
+    added_by
   };
 
   let response = await fetch(api, {
@@ -54,10 +56,10 @@ const createGame = async () => {
     console.log(body);
   }
 
-  if(createGame()){
-    getGames()
-  }
-
+  inputTitle.value=""
+  catGenre.value= ""
+  catRating.value= ""
+  inputRelease.value= ""
 
 
 };
@@ -72,7 +74,9 @@ const getGames = async () => {
   });
 
   let body = await response.json();
-  let username = window.localStorage.getItem("username")
+  
+
+
   if (response.ok) {
     let tableLayout = `<tr>
             <th>Title</th>
@@ -92,12 +96,12 @@ const getGames = async () => {
             <td>${body[i].rating}</td>
             <td>${body[i].release_date}</td>
             <td> <button onclick="deleteGame(${body[i].id})" class="btn btn-danger">Delete Game</button></td>
-            <td> <p>Added By: ${username}</p> </td>
+            <td> <p>Added By: ${body[i].added_by}</p> </td>
             </tr>`;
     }
     gameTable.innerHTML = tableLayout;
     centerButton.style.display = "none"
-    console.log("tableUser")
+    console.log(body)
   }
 };
 
