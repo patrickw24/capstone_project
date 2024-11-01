@@ -50,7 +50,7 @@ const createGame = async () => {
 
   if (response.ok) {
     console.log("Game added");
-   
+    
   } else {
     let body = await response.json();
     console.log(body);
