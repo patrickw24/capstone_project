@@ -100,8 +100,7 @@ const getGames = async () => {
             </tr>`;
     }
     gameTable.innerHTML = tableLayout;
-    centerButton.style.display = "none"
-    console.log(body)
+    
   }
 };
 
